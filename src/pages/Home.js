@@ -6,7 +6,7 @@ import {
   Looks4,
   Looks5,
   Looks6,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -15,7 +15,7 @@ import {
   List,
   ListItem,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const Home = () => {
   const [results, setResults] = useState([]);
@@ -28,13 +28,11 @@ const Home = () => {
     "Totally fair",
     "Definitly not biased",
     "Trump approved",
-    "Inspired by Bill Gates",
+    "Funded by the Bill and Melinda Gates Foundation",
     "The source of global warming",
     "Worse than advertised",
     "MADE WITH A BROKEN CAPS LOCK KEY",
-    "Source of the deep state conspiracy",
-    "Now with Russian interference",
-    "Funded by beer can deposits",
+    "Featured on Toonami",
     "Not available in other languages",
     "R.I.P. Tsubaki box",
     "Twitch streaming favorite",
@@ -100,7 +98,7 @@ const Home = () => {
         <Typography variant="caption" display="block">{title2}</Typography>
       </Box>
 
-      <ButtonGroup>
+      <ButtonGroup variant="contained" aria-label="outlined primary button group">
         <Button
           color="primary"
           variant="contained"
@@ -137,12 +135,11 @@ const Home = () => {
           +5
         </Button>
         <Button
-          flexGrow={1}
           color="primary"
           variant="contained"
           onClick={() => roll()}
         >
-          Roll {numDice} {numDice === 1 ? " die" : "dice"}
+          Roll {numDice} {numDice === 1 ? "die" : "dice"}
         </Button>
       </ButtonGroup>
 
