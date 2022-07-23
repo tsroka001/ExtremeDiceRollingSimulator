@@ -11,7 +11,7 @@ const Home = () => {
     <Container maxWidth="xs">
       <HomeTitle />
       <HomeControls setResults={setResults} />
-      <HomeResults results={results} />
+      <HomeResults results={results} setResults={setResults} />
     </Container>
   );
 };
