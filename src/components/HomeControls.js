@@ -1,35 +1,45 @@
-import React, { useState, useEffect } from "react";
-import {
-  Button,
-  ButtonGroup,
-  Grid,
-} from "@mui/material";
+import React, { useState } from "react";
+import { Button, ButtonGroup, Grid } from "@mui/material";
 
 const HomeControls = (props) => {
-    //const [results, setResults] = useState([]);
-    const [numDice, setNumDice] = useState(1);
-    const [numSides, setNumsides] = useState(6);
+  //const [results, setResults] = useState([]);
+  const [numDice, setNumDice] = useState(1);
+  const [numSides, setNumsides] = useState(6);
 
-    const adjustDiceCount = (num) => {
-      //Minimum of 1 die must be rolled
-      setNumDice((x) => Math.max(x + num, 1));
-    };
-  
-    const adjustNumSides = (num) => {
-      //Minimum of 2 sides required per die
-      setNumsides((x) => Math.max(x + num, 2));
-    };
-  
-    const roll = () => {  
-      let rolls = [...Array(numSides).keys()].map((v) => (0));
+  const adjustDiceCount = (num) => {
+    //Minimum of 1 die must be rolled
+    setNumDice((x) => Math.max(x + num, 1));
+  };
 
-      for (var i = 0; i < numDice; i++) {
-        let res = Math.floor(Math.random() * numSides) + 1;
-        rolls[res-1]++;
+  const adjustNumSides = (num) => {
+    //Minimum of 2 sides required per die
+    setNumsides((x) => Math.max(x + num, 2));
+  };
+
+  const roll = () => {
+    let res = [...Array(numSides).keys()].map((v) => ({
+      rolls: 0,
+      numGTE: 0,
+      numLT: 0,
+      numRerolled: 0,
+    }));
+
+    for (let i = 0; i < numDice; i++) {
+      let roll = Math.floor(Math.random() * numSides) + 1;
+      res[roll - 1].rolls++;
+
+      for (let m = 0; m < roll; m++) {
+        res[m].numGTE++;
       }
-      props.setResults([...rolls]);
-    };
-  
+
+      for (let n = roll; n < numSides; n++) {
+        res[n].numLT++;
+      }
+    }
+
+    props.setResults([...res]);
+  };
+
   return (
     <Grid container spacing={1} mt={2}>
       <Grid item xs={3}>

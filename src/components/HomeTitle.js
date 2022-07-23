@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Typography,
-  Stack,
-} from "@mui/material";
+import { Box, Typography, Stack } from "@mui/material";
 
 const HomeTitle = () => {
   const [slogan, setSlogan] = useState("");
@@ -30,9 +26,7 @@ const HomeTitle = () => {
   const title = "Extreme Dice Rolling Simulator";
 
   useEffect(() => {
-    setSlogan(
-      '"' + slogans[Math.floor(Math.random() * slogans.length)] + '"'
-    );
+    setSlogan('"' + slogans[Math.floor(Math.random() * slogans.length)] + '"');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
