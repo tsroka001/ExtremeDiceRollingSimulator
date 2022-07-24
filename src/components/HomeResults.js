@@ -9,7 +9,7 @@ import {
   Box,
   ButtonBase,
 } from "@mui/material";
-import { blue } from '@mui/material/colors';
+import { blue } from "@mui/material/colors";
 
 const HomeResults = (props) => {
   const reroll = (rerolledValue) => {
@@ -17,8 +17,17 @@ const HomeResults = (props) => {
     let roll = Math.floor(Math.random() * numSides) + 1;
 
     let tempArray = [...props.results];
+
+    for (let m = rerolledValue ; m < numSides; m++) {
+      tempArray[m].numGTE--;
+    }
+
     tempArray[rerolledValue].rolls--;
-    tempArray[roll-1].numRerolled++;
+    tempArray[roll - 1].numRerolled++;
+
+    for (let m = roll-1; m < numSides; m++) {
+      tempArray[m].numGTE++;
+    }
 
     props.setResults(tempArray);
   };
@@ -27,8 +36,7 @@ const HomeResults = (props) => {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell sx={{ width: "25px" }}>{"<="}</TableCell>
-          <TableCell sx={{ width: "25px" }}>{">"}</TableCell>
+          <TableCell sx={{ width: "25px" }}>{"n+"}</TableCell>
           <TableCell sx={{ width: "25px" }}>{"#"}</TableCell>
           <TableCell>{"Result"}</TableCell>
         </TableRow>
@@ -37,7 +45,6 @@ const HomeResults = (props) => {
         {props.results.map((die, ix) => (
           <TableRow key={ix}>
             <TableCell>{die.numGTE}</TableCell>
-            <TableCell>{die.numLT}</TableCell>
             <TableCell>{die.rolls + die.numRerolled}</TableCell>
             <TableCell>
               <Box display="flex" sx={{ alignItems: "flex-start" }}>
@@ -52,13 +59,18 @@ const HomeResults = (props) => {
                   </ButtonBase>
                 ))}
                 {[...Array(die.numRerolled).keys()].map((n) => (
-                    <Avatar
-                      variant="rounded"
-                   
-                      sx={{ width: "25px", height: "25px", margin: "1px", bgcolor: blue[500]  }}
-                    >
-                      {ix + 1}
-                    </Avatar>
+                  <Avatar
+                    key={n}
+                    variant="rounded"
+                    sx={{
+                      width: "25px",
+                      height: "25px",
+                      margin: "1px",
+                      bgcolor: blue[500],
+                    }}
+                  >
+                    {ix + 1}
+                  </Avatar>
                 ))}
               </Box>
             </TableCell>

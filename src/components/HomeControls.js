@@ -20,7 +20,6 @@ const HomeControls = (props) => {
     let res = [...Array(numSides).keys()].map((v) => ({
       rolls: 0,
       numGTE: 0,
-      numLT: 0,
       numRerolled: 0,
     }));
 
@@ -28,13 +27,10 @@ const HomeControls = (props) => {
       let roll = Math.floor(Math.random() * numSides) + 1;
       res[roll - 1].rolls++;
 
-      for (let m = 0; m < roll; m++) {
+      for (let m = roll-1; m < numSides; m++) {
         res[m].numGTE++;
       }
 
-      for (let n = roll; n < numSides; n++) {
-        res[n].numLT++;
-      }
     }
 
     props.setResults([...res]);
