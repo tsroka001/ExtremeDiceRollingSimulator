@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/ExtremeDiceRollingSimulator/static/js/main.970c6933.js",
+    "main.js": "/ExtremeDiceRollingSimulator/static/js/main.7e45b457.js",
     "static/js/787.c41c9ef3.chunk.js": "/ExtremeDiceRollingSimulator/static/js/787.c41c9ef3.chunk.js",
     "index.html": "/ExtremeDiceRollingSimulator/index.html",
-    "main.970c6933.js.map": "/ExtremeDiceRollingSimulator/static/js/main.970c6933.js.map",
+    "main.7e45b457.js.map": "/ExtremeDiceRollingSimulator/static/js/main.7e45b457.js.map",
     "787.c41c9ef3.chunk.js.map": "/ExtremeDiceRollingSimulator/static/js/787.c41c9ef3.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.970c6933.js"
+    "static/js/main.7e45b457.js"
   ]
 }
