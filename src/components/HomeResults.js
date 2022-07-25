@@ -12,22 +12,24 @@ import {
 import { blue } from "@mui/material/colors";
 
 const HomeResults = (props) => {
-  const reroll = (rerolledValue) => {
+  //Users area allowed to reroll each die once
+  const reroll = (oldRollIndex) => {
     let numSides = props.results.length;
-    let roll = Math.floor(Math.random() * numSides) + 1;
+    let newRoll = Math.floor(Math.random() * numSides) + 1;
 
     let tempArray = [...props.results];
 
-    for (let m = rerolledValue ; m < numSides; m++) {
-      tempArray[m].numGTE--;
-    }
+    tempArray[oldRollIndex].rolls--;
+    tempArray[newRoll - 1].numRerolled++;
 
-    tempArray[rerolledValue].rolls--;
-    tempArray[roll - 1].numRerolled++;
-
-    for (let m = roll-1; m < numSides; m++) {
-      tempArray[m].numGTE++;
-    }
+    //if the reroll changes the value, update the n+ statistics
+    if(oldRollIndex + 1 !== newRoll){
+      let subTotal = 0;
+      for (let m = numSides-1; m >= 0; m--) {
+        subTotal = subTotal + tempArray[m].rolls + tempArray[m].numRerolled;
+        tempArray[m].numGTE = subTotal;
+      }
+    }    
 
     props.setResults(tempArray);
   };

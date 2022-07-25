@@ -19,18 +19,19 @@ const HomeControls = (props) => {
   const roll = () => {
     let res = [...Array(numSides).keys()].map((v) => ({
       rolls: 0,
-      numGTE: 0,
+      numGTE: numDice,
       numRerolled: 0,
     }));
 
     for (let i = 0; i < numDice; i++) {
       let roll = Math.floor(Math.random() * numSides) + 1;
       res[roll - 1].rolls++;
+    }
 
-      for (let m = roll-1; m < numSides; m++) {
-        res[m].numGTE++;
-      }
-
+    let subTotal = 0;
+    for (let m = numSides-1; m >= 0; m--) {
+      subTotal = subTotal + res[m].rolls;
+      res[m].numGTE = subTotal;
     }
 
     props.setResults([...res]);
